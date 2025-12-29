@@ -1,0 +1,26 @@
+import requests
+from bs4 import BeautifulSoup
+
+def get_job_description(url):
+    """
+    Scrapes job description text from a given URL.
+    Works best on company career pages (Lever, Greenhouse, etc).
+    """
+    try:
+        response = requests.get(url)
+        soup = BeautifulSoup(response.content, 'html.parser')
+        
+        # Remove noise
+        for script in soup(["script", "style", "nav", "footer"]):
+            script.decompose()
+            
+        text = soup.get_text(separator=' ')
+        return ' '.join(text.split())
+    
+    except Exception as e:
+        return f"Error scraping job: {str(e)}"
+# Test
+url = "https://apply.deloitte.com/en_US/careers/InviteToApply?jobId=320167&source=LinkedIn"
+jd_text = get_job_description(url)
+print(f"Scraped {len(jd_text)} characters.")
+print(f"Scraped  characters."+ jd_text)
