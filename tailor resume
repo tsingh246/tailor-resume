@@ -23,4 +23,4 @@ def get_job_description(url):
 url = "https://apply.deloitte.com/en_US/careers/InviteToApply?jobId=320167&source=LinkedIn"
 jd_text = get_job_description(url)
 print(f"Scraped {len(jd_text)} characters.")
-print(f"Scraped  characters."+ jd_text )
+print(f"Scraped  characters."+ jd_text)
